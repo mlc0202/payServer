@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yunqitong.mapper.TOrderAliRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.yunqitong.mapper.TOrderAliRecord" >
+    <id column="aid" property="aid" jdbcType="VARCHAR" />
+    <result column="device_info" property="deviceInfo" jdbcType="VARCHAR" />
+    <result column="nonce_str" property="nonceStr" jdbcType="VARCHAR" />
+    <result column="sign" property="sign" jdbcType="VARCHAR" />
+    <result column="body" property="body" jdbcType="VARCHAR" />
+    <result column="detail" property="detail" jdbcType="VARCHAR" />
+    <result column="attach" property="attach" jdbcType="VARCHAR" />
+    <result column="out_trade_no" property="outTradeNo" jdbcType="VARCHAR" />
+    <result column="local_trade_no" property="localTradeNo" jdbcType="VARCHAR" />
+    <result column="fee_type" property="feeType" jdbcType="VARCHAR" />
+    <result column="total_fee" property="totalFee" jdbcType="BIGINT" />
+    <result column="spbill_create_ip" property="spbillCreateIp" jdbcType="VARCHAR" />
+    <result column="time_start" property="timeStart" jdbcType="VARCHAR" />
+    <result column="time_expire" property="timeExpire" jdbcType="VARCHAR" />
+    <result column="goods_tag" property="goodsTag" jdbcType="VARCHAR" />
+    <result column="trade_type" property="tradeType" jdbcType="VARCHAR" />
+    <result column="product_id" property="productId" jdbcType="VARCHAR" />
+    <result column="openid" property="openid" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="accept_content" property="acceptContent" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    aid, device_info, nonce_str, sign, body, detail, attach, out_trade_no, local_trade_no, 
+    fee_type, total_fee, spbill_create_ip, time_start, time_expire, goods_tag, trade_type, 
+    product_id, openid, status, accept_content
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yunqitong.mapper.TOrderAliRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_order_ali_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_ali_record
+    where aid = #{aid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_order_ali_record
+    where aid = #{aid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yunqitong.mapper.TOrderAliRecordExample" >
+    delete from t_order_ali_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yunqitong.mapper.TOrderAliRecord" >
+    insert into t_order_ali_record (aid, device_info, nonce_str, 
+      sign, body, detail, 
+      attach, out_trade_no, local_trade_no, 
+      fee_type, total_fee, spbill_create_ip, 
+      time_start, time_expire, goods_tag, 
+      trade_type, product_id, openid, 
+      status, accept_content)
+    values (#{aid,jdbcType=VARCHAR}, #{deviceInfo,jdbcType=VARCHAR}, #{nonceStr,jdbcType=VARCHAR}, 
+      #{sign,jdbcType=VARCHAR}, #{body,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, 
+      #{attach,jdbcType=VARCHAR}, #{outTradeNo,jdbcType=VARCHAR}, #{localTradeNo,jdbcType=VARCHAR}, 
+      #{feeType,jdbcType=VARCHAR}, #{totalFee,jdbcType=BIGINT}, #{spbillCreateIp,jdbcType=VARCHAR}, 
+      #{timeStart,jdbcType=VARCHAR}, #{timeExpire,jdbcType=VARCHAR}, #{goodsTag,jdbcType=VARCHAR}, 
+      #{tradeType,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{acceptContent,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yunqitong.mapper.TOrderAliRecord" >
+    insert into t_order_ali_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="aid != null" >
+        aid,
+      </if>
+      <if test="deviceInfo != null" >
+        device_info,
+      </if>
+      <if test="nonceStr != null" >
+        nonce_str,
+      </if>
+      <if test="sign != null" >
+        sign,
+      </if>
+      <if test="body != null" >
+        body,
+      </if>
+      <if test="detail != null" >
+        detail,
+      </if>
+      <if test="attach != null" >
+        attach,
+      </if>
+      <if test="outTradeNo != null" >
+        out_trade_no,
+      </if>
+      <if test="localTradeNo != null" >
+        local_trade_no,
+      </if>
+      <if test="feeType != null" >
+        fee_type,
+      </if>
+      <if test="totalFee != null" >
+        total_fee,
+      </if>
+      <if test="spbillCreateIp != null" >
+        spbill_create_ip,
+      </if>
+      <if test="timeStart != null" >
+        time_start,
+      </if>
+      <if test="timeExpire != null" >
+        time_expire,
+      </if>
+      <if test="goodsTag != null" >
+        goods_tag,
+      </if>
+      <if test="tradeType != null" >
+        trade_type,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="openid != null" >
+        openid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="acceptContent != null" >
+        accept_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="aid != null" >
+        #{aid,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceInfo != null" >
+        #{deviceInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="nonceStr != null" >
+        #{nonceStr,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="body != null" >
+        #{body,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null" >
+        #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="attach != null" >
+        #{attach,jdbcType=VARCHAR},
+      </if>
+      <if test="outTradeNo != null" >
+        #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="localTradeNo != null" >
+        #{localTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="feeType != null" >
+        #{feeType,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null" >
+        #{totalFee,jdbcType=BIGINT},
+      </if>
+      <if test="spbillCreateIp != null" >
+        #{spbillCreateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="timeStart != null" >
+        #{timeStart,jdbcType=VARCHAR},
+      </if>
+      <if test="timeExpire != null" >
+        #{timeExpire,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsTag != null" >
+        #{goodsTag,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null" >
+        #{tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="acceptContent != null" >
+        #{acceptContent,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yunqitong.mapper.TOrderAliRecordExample" resultType="java.lang.Integer" >
+    select count(*) from t_order_ali_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_order_ali_record
+    <set >
+      <if test="record.aid != null" >
+        aid = #{record.aid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceInfo != null" >
+        device_info = #{record.deviceInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nonceStr != null" >
+        nonce_str = #{record.nonceStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sign != null" >
+        sign = #{record.sign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.body != null" >
+        body = #{record.body,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detail != null" >
+        detail = #{record.detail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attach != null" >
+        attach = #{record.attach,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outTradeNo != null" >
+        out_trade_no = #{record.outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.localTradeNo != null" >
+        local_trade_no = #{record.localTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feeType != null" >
+        fee_type = #{record.feeType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalFee != null" >
+        total_fee = #{record.totalFee,jdbcType=BIGINT},
+      </if>
+      <if test="record.spbillCreateIp != null" >
+        spbill_create_ip = #{record.spbillCreateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timeStart != null" >
+        time_start = #{record.timeStart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timeExpire != null" >
+        time_expire = #{record.timeExpire,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsTag != null" >
+        goods_tag = #{record.goodsTag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tradeType != null" >
+        trade_type = #{record.tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productId != null" >
+        product_id = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openid != null" >
+        openid = #{record.openid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.acceptContent != null" >
+        accept_content = #{record.acceptContent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_order_ali_record
+    set aid = #{record.aid,jdbcType=VARCHAR},
+      device_info = #{record.deviceInfo,jdbcType=VARCHAR},
+      nonce_str = #{record.nonceStr,jdbcType=VARCHAR},
+      sign = #{record.sign,jdbcType=VARCHAR},
+      body = #{record.body,jdbcType=VARCHAR},
+      detail = #{record.detail,jdbcType=VARCHAR},
+      attach = #{record.attach,jdbcType=VARCHAR},
+      out_trade_no = #{record.outTradeNo,jdbcType=VARCHAR},
+      local_trade_no = #{record.localTradeNo,jdbcType=VARCHAR},
+      fee_type = #{record.feeType,jdbcType=VARCHAR},
+      total_fee = #{record.totalFee,jdbcType=BIGINT},
+      spbill_create_ip = #{record.spbillCreateIp,jdbcType=VARCHAR},
+      time_start = #{record.timeStart,jdbcType=VARCHAR},
+      time_expire = #{record.timeExpire,jdbcType=VARCHAR},
+      goods_tag = #{record.goodsTag,jdbcType=VARCHAR},
+      trade_type = #{record.tradeType,jdbcType=VARCHAR},
+      product_id = #{record.productId,jdbcType=VARCHAR},
+      openid = #{record.openid,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      accept_content = #{record.acceptContent,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yunqitong.mapper.TOrderAliRecord" >
+    update t_order_ali_record
+    <set >
+      <if test="deviceInfo != null" >
+        device_info = #{deviceInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="nonceStr != null" >
+        nonce_str = #{nonceStr,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        sign = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="body != null" >
+        body = #{body,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null" >
+        detail = #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="attach != null" >
+        attach = #{attach,jdbcType=VARCHAR},
+      </if>
+      <if test="outTradeNo != null" >
+        out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="localTradeNo != null" >
+        local_trade_no = #{localTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="feeType != null" >
+        fee_type = #{feeType,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null" >
+        total_fee = #{totalFee,jdbcType=BIGINT},
+      </if>
+      <if test="spbillCreateIp != null" >
+        spbill_create_ip = #{spbillCreateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="timeStart != null" >
+        time_start = #{timeStart,jdbcType=VARCHAR},
+      </if>
+      <if test="timeExpire != null" >
+        time_expire = #{timeExpire,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsTag != null" >
+        goods_tag = #{goodsTag,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null" >
+        trade_type = #{tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="acceptContent != null" >
+        accept_content = #{acceptContent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where aid = #{aid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yunqitong.mapper.TOrderAliRecord" >
+    update t_order_ali_record
+    set device_info = #{deviceInfo,jdbcType=VARCHAR},
+      nonce_str = #{nonceStr,jdbcType=VARCHAR},
+      sign = #{sign,jdbcType=VARCHAR},
+      body = #{body,jdbcType=VARCHAR},
+      detail = #{detail,jdbcType=VARCHAR},
+      attach = #{attach,jdbcType=VARCHAR},
+      out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+      local_trade_no = #{localTradeNo,jdbcType=VARCHAR},
+      fee_type = #{feeType,jdbcType=VARCHAR},
+      total_fee = #{totalFee,jdbcType=BIGINT},
+      spbill_create_ip = #{spbillCreateIp,jdbcType=VARCHAR},
+      time_start = #{timeStart,jdbcType=VARCHAR},
+      time_expire = #{timeExpire,jdbcType=VARCHAR},
+      goods_tag = #{goodsTag,jdbcType=VARCHAR},
+      trade_type = #{tradeType,jdbcType=VARCHAR},
+      product_id = #{productId,jdbcType=VARCHAR},
+      openid = #{openid,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      accept_content = #{acceptContent,jdbcType=VARCHAR}
+    where aid = #{aid,jdbcType=VARCHAR}
+  </update>
+</mapper>
